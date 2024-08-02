@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/css/output.css" rel="stylesheet">
+  <script src="/js/app.js" defer></script>
+</head>
+
+<body>
+  <div class="w-svw h-svh flex flex-col gap-6 my-auto items-center justify-center">
+    <h1 class="text-4xl">Weather App</h1>
+    <div class="h-fit flex flex-col items-center">
+      <div id="weather-wrapper" class="opacity-0  max-h-0 transition-all duration-500 overflow-hidden">
+        <div class="flex flex-col border-2 border-neutral-50 rounded-md p-8 gap-4 items-center">
+          <img id="weather-img" src="https://openweathermap.org/img/wn/10d@2x.png" />
+          <p id="weather-desc" class="capitalize text-lg font-bold">Clear Sky</p>
+          <p id="weather-temp">Temp: 30c</p>
+          <p id="weather-temp-fl">Feels like: 30c</p>
+          <button class="btn btn-outline btn-primary" onclick="history_modal.showModal()">History</button>
+        </div>
+      </div>
+      <span id="loading-indicator"
+        class="loading loading-spinner loading-lg opacity-0 max-h-0 transition overflow-hidden mx-auto"></span>
+      <div id="error-alert" role="alert"
+        class="alert alert-error w-fit opacity-0 scale-0 max-h-0 transition duration-500 overflow-clip">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Error! No city was found by that name!</span>
+      </div>
+    </div>
+    <form id="weather-form" class="flex flex-col items-center gap-4 group" novalidate>
+      <div class="flex flex-col gap-2 items-center">
+        <input id="search-input" placeholder="City"
+          class="peer input input-primary invalid:[&:not(:placeholder-shown):not(:focus)]:input-error transition"
+          required minlength="4" />
+        <span class="hidden text-sm text-error peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+          Please enter a valid city name, at least 4 characters long.
+        </span>
+      </div>
+      <button id="search-btn"
+        class="btn btn-primary uppercase group-invalid:pointer-events-none group-invalid:opacity-30"
+        href="">Search</button>
+    </form>
+  </div>
+
+  <dialog id="history_modal" class="modal">
+    <div class="modal-box">
+      <p id="history-title" class="text-xl text-primary text-center my-4 capitalize"></p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Temperature</th>
+            <th>Weather condition</th>
+            <th>Time added</th>
+          </tr>
+        </thead>
+        <tbody id="history-table">
+
+        </tbody>
+      </table>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+</body>
+
+</html>
